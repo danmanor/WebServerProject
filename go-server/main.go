@@ -20,13 +20,13 @@ import (
 	//
 	//    sw "github.com/myname/myrepo/go"
 	//
-	sw "./go"
+	sw "github.com/danmanor/WebServerProject/go-server/go"
 )
 
 func main() {
-	log.Printf("Server started")
+	log.Printf("Server started in port 3000")
 
 	router := sw.NewRouter()
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":3000", router))
 }

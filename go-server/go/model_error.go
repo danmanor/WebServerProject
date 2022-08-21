@@ -9,7 +9,14 @@
  */
 package swagger
 
+import "fmt"
+
 type ModelError struct {
 	StatusCode int32 `json:"statusCode,omitempty"`
+
 	Message string `json:"message,omitempty"`
+}
+
+func (m ModelError) Error() string {
+	return fmt.Sprintf("Error: %s, Status Code: %d\n", m.Message, m.StatusCode)
 }

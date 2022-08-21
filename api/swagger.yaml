@@ -64,8 +64,8 @@ paths:
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int64
+          type: string
+          format: uuid
       responses:
         "200":
           description: User delete successfully
