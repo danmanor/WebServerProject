@@ -1,0 +1,119 @@
+openapi: 3.0.2
+info:
+  title: Web Server
+  description: A simple web server for managing users
+  contact:
+    email: dmanor@redhat.com
+  version: "1.0"
+servers:
+- url: http://127.0.0.1:3000
+paths:
+  /api/users:
+    get:
+      summary: Retrieves all the users from the system
+      operationId: findUsers
+      responses:
+        "200":
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+                x-content-type: application/json
+        "405":
+          description: A problem occured while retrieving users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new user in the system
+      description: Create a new user in the system
+      operationId: addUser
+      requestBody:
+        description: Create a new user in the system
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+        required: true
+      responses:
+        "200":
+          description: User added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "405":
+          description: "Invalid input, the user already exist in the system"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/users/{id}:
+    delete:
+      summary: Deletes a user from the system
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        description: user id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: User delete successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "405":
+          description: "Invalid id, there is no user with such id in the system"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+      example:
+        name: Dan
+        id: 1
+        email: dmanor@redhat.com
+    NewUser:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+      example:
+        name: Dan
+        email: dmanor@redhat.com
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      example:
+        statusCode: 405
+        message: Something wen wrong!
