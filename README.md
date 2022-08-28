@@ -23,7 +23,15 @@ pull the app-k8s folder
 
 ```
 minikube start
+kubectl create secret generic postgres-password --from-literal POSTGRES_PASSWORD=<password>
 kubectl apply -f app-k8s
+```
+
+pull app-client
+then run inside:
+
+```
+go run main.go
 ```
 
 ## Documentation for API Endpoints

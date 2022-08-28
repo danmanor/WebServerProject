@@ -10,9 +10,7 @@
 package swagger
 
 import (
-	"fmt"
 	"net/http"
-	"os"
 )
 
 // contextKeys are used to identify the type of value in the context.
@@ -61,9 +59,15 @@ type Configuration struct {
 }
 
 func NewConfiguration() *Configuration {
-	host := os.Getenv("SERVER_HOST")
-	port := os.Getenv("SERVER_PORT")
-	basePath := fmt.Sprintf("http://%s:%s:", host, port)
+	// for internal client cluster communication (without ingress)
+
+	//host := os.Getenv("SERVER_HOST")
+	//port := os.Getenv("SERVER_PORT")
+	//basePath := fmt.Sprintf("http://%s:%s:", host, port)
+
+	//for external client communication (with ingress)
+
+	basePath := "http://192.168.49.2"
 	cfg := &Configuration{
 		BasePath:      basePath,
 		DefaultHeader: make(map[string]string),

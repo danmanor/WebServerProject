@@ -12,37 +12,37 @@ spec:
         component: server
     spec:
       containers:
-        - name: server
-          image: quay.io/dmanor/web-app-server
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-          ports:
-            - containerPort: 3000
-          env:
-            - name: PGUSER
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config-map
-                  key: PGUSER
-            - name: PGHOST
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config-map
-                  key: PGHOST
-            - name: PGPORT
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config-map
-                  key: PGPORT
-            - name: PGDATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config-map
-                  key: PGDATABASE
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: POSTGRES_PASSWORD
-                  name: postgres-password
+      - name: server
+        image: quay.io/dmanor/web-app-server
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 3000
+        env:
+        - name: PGUSER
+          valueFrom:
+            configMapKeyRef:
+              name: app-config-map
+              key: PGUSER
+        - name: PGHOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-config-map
+              key: PGHOST
+        - name: PGPORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config-map
+              key: PGPORT
+        - name: PGDATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: app-config-map
+              key: PGDATABASE
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: POSTGRES_PASSWORD
+              name: postgres-password
