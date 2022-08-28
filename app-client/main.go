@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	sw "github.com/danmanor/WebServerProject/go-client/go"
+	sw "github.com/danmanor/containerApp/go"
 )
 
 func addUserClient() {

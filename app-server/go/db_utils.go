@@ -26,6 +26,9 @@ func connectDB() *sql.DB {
 	}
 
 	fmt.Println("Successfully connected!")
+
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS users (userId UUID DEFAULT gen_random_uuid (), name VARCHAR (50), email VARCHAR (255) UNIQUE, PRIMARY KEY(userId))")
+
 	return db
 }
 

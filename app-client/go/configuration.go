@@ -10,7 +10,9 @@
 package swagger
 
 import (
+	"fmt"
 	"net/http"
+	"os"
 )
 
 // contextKeys are used to identify the type of value in the context.
@@ -59,13 +61,18 @@ type Configuration struct {
 }
 
 func NewConfiguration() *Configuration {
+	host := os.Getenv("SERVER_HOST")
+	port := os.Getenv("SERVER_PORT")
+	basePath := fmt.Sprintf("http://%s:%s:", host, port)
 	cfg := &Configuration{
-		BasePath:      "http://127.0.0.1:3000",
+		BasePath:      basePath,
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "Swagger-Codegen/1.0.0/go",
 	}
 	return cfg
 }
+
+//"http://192.168.49.2:31769:"
 
 func (c *Configuration) AddDefaultHeader(key string, value string) {
 	c.DefaultHeader[key] = value
